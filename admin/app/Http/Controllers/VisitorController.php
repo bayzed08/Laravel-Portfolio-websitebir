@@ -10,7 +10,7 @@ class VisitorController extends Controller
     function VisitorIndex(){
 
         // $visitorData=json_decode(visitorModel::all());
-        $visitorData=json_decode(visitorModel::orderBy('id','desc')->take(5)->get());
+        $visitorData=json_decode(visitorModel::orderBy('id','desc')->take(100)->get());
          return view('Visitor',['visitorDataKey'=>$visitorData]);
     }
 }
