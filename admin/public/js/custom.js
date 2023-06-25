@@ -11,7 +11,6 @@ function getServiceDataToservice(){
     axios.get('/getservicedata')
     .then(function(response){
         if (response.status==200) {
-            aler
             $('#mainDiv').removeClass('d-none');
             $('#spinDiv').addClass('d-none');
             var datajson=response.data;
@@ -46,23 +45,25 @@ function getServiceDataToservice(){
 }
 
 $('#serviceConfirmBtnModal').click(function (e) {
-    var id=$(this).data('id');
-    alert(id);
-    getServiceDelete(id);
+    var id2=$(this).data('id');
+    // alert(id2);
+    getServiceDelete(id2);
 });
 
 function getServiceDelete(deleteID){
-    alert(deleteID);
-    axios.post('/deleteservicedata',{id:deleteID})
-    .then(function(response){
+    axios.post('/deleteservicedata', {
+        id: deleteID
+      })
+      .then(function (response) {
         if (response.data==1) {
             alert("Success");
+            getServiceDataToservice();
+
         } else {
             alert("Fail");
         }
-
-    })
-    .catch(function(error){
-
-    })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 }

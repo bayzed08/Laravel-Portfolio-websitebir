@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\SevicesModel;
-use Illuminate\Http\Request;
 use App\Models\ServicesModel;
+use Illuminate\Http\Request;
+
 
 class ServicesController extends Controller
 {
@@ -17,13 +16,13 @@ class ServicesController extends Controller
     }
 
     function getServiceData(){
-        $result=json_encode(SevicesModel::all());
+        $result=json_encode(ServicesModel::all());
         return $result;
     }
 
     function  deleteServiceData(Request $req){
         $resultID=$req->input('id');
-        $isDelete=SevicesModel::where('id','=',$resultID)->delete();
+        $isDelete=ServicesModel::where('id','=',$resultID)->delete();
         if ($isDelete==true) {
             return 1;
         } else {
