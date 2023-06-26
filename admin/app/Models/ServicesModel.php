@@ -11,5 +11,5 @@ class ServicesModel extends Model
     public $primaryKey='id';
     public $incrementing=true;
     public $keyType='int';
-    public  $timestamps=false;
+    public $timestamps=false;
 }

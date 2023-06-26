@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 class ServicesController extends Controller
 {
     function ServicesIndex(){
-
-        // $servicesData=json_decode(SevicesModel::all());
-        // return view('Services',['servicesDataKey'=>$servicesData]);
         return view('Services');
     }
 
