@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class ServicesController extends Controller
 {
     function ServicesIndex(){
-        return view('Services');
+
+        $servicesData=json_decode(ServicesModel::all());
+        return view('Services',['servicesDataKey'=>$servicesData]);
     }
 
     function getServiceData(){
@@ -25,5 +27,17 @@ class ServicesController extends Controller
         } else {
             return 0;
         }
+    }
+    function addNewServiceData(Request $req){
+        $ServiceName=$req->input('ServiceName');
+        $ServiceDesc=$req->input('ServiceDesc');
+        $ServiceImgLink=$req->input('ServiceImgLink');
+        $result=ServicesModel::insert(['service_name'=>$ServiceName,'service_des'=>$ServiceDesc,'service_img'=>$ServiceImgLink]);
+        if ($result==true) {
+            return 1;
+        } else {
+            return 0;
+        }
+        // return $ServiceName." ". $ServiceDesc." ".$ServiceImgLink;
     }
 }

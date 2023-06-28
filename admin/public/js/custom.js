@@ -70,3 +70,60 @@ function getServiceDelete(deleteID) {
             console.log(error);
         });
 }
+
+
+//Add button to show add service modal
+$('#addbtnid').click(function (e) {
+    e.preventDefault();
+    $('#addModal').modal('show');
+});
+
+//Modal add btn to insert new service
+$('#addserviceBtnModal').click(function (e) {
+    e.preventDefault();
+    var Servicename= $('#addServiceNameID').val();
+    var Servicedesc= $('#addServiceDescID').val();
+    var ServiceImgLink= $('#AddImgLinkid').val();
+    NewServiceInsertToDB(Servicename,Servicedesc,ServiceImgLink);
+});
+
+//new service add function
+function NewServiceInsertToDB(Servicename,Servicedesc,ServiceImgLink) {
+    if (Servicename.length==0) {
+        toastr.error("Service name Empty");
+    } else if(Servicedesc.length==0) {
+        toastr.error("Service Description Empty");
+    } else if(ServiceImgLink.length==0){
+        toastr.error("Service Image link Empty");
+    }
+    else{
+       $('#addserviceBtnModal').html(`<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>
+       Adding...`);
+       axios.post('/addnewservice',{ServiceName:Servicename,ServiceDesc:Servicedesc,ServiceImgLink:ServiceImgLink})
+       .then(function (response) {
+        $('#addserviceBtnModal').html(`Add`);
+        if (response.status==200) {
+            if (response.data==1) {
+                $('#addModal').modal('hide');
+                toastr.success('Successfully data inserted');
+                getServiceDataToservice()
+            } else {
+                ('#addModal').modal('hide');
+                toastr.error('data insertion Fail');
+                getServiceDataToservice()
+            }
+
+        } else {
+            ('#addModal').modal('hide');
+            toastr.error('Something Went wrong');
+            getServiceDataToservice()
+        }
+
+
+       }).catch(function (error) {
+
+       })
+    }
+
+}
+
