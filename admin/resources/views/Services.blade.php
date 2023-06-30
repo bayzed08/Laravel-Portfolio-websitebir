@@ -6,7 +6,7 @@
             <div class="my-3">
                 <button class="btn btn-outline-danger" id="addbtnid">Add  New Service</button>
             </div>
-            <table class="table table-striped table-bordered w-100 mt-4">
+            <table class="table table-striped table-bordered w-100 mt-3">
                 <thead>
                     <tr>
                         <th class="th-sm">Image</th>
@@ -16,7 +16,7 @@
                         <th class="th-sm">Delete</th>
                       </tr>
                 </thead>
-                <tbody id="servicdatatab">
+                <tbody id="servicdatatab" class="w-100">
                     @foreach ($servicesDataKey as $service)
                     <tr>
                         <th class="th-sm"><img class="table-img" src="{{ url($service->service_img) }}"></th>
