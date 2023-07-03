@@ -1,4 +1,5 @@
 @extends('Layout.app')
+@section('title','VisitorPage')
 @section('content')
 <div class="container">
     <div class="row">

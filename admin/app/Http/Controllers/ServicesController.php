@@ -11,7 +11,8 @@ class ServicesController extends Controller
     function ServicesIndex(){
 
         $servicesData=json_decode(ServicesModel::all());
-        return view('Services',['servicesDataKey'=>$servicesData]);
+        // return view('Services',['servicesDataKey'=>$servicesData]);
+         return view('Services');
     }
 
     function getServiceData(){
@@ -28,6 +29,28 @@ class ServicesController extends Controller
             return 0;
         }
     }
+
+    function detailsServiceData(Request $req){
+        $id=$req->input('id');
+        $detailsdata=json_encode(ServicesModel::where('id','=',$id)->get());
+        return $detailsdata;
+    }
+
+    function  updateServiceData(Request $req){
+        $id=$req->input('id');
+        $sName=$req->input('sName');
+        $sDescription=$req->input('sDescription');
+        $sImgLink=$req->input('sImgLink');
+
+        $result=ServicesModel::where('id','=',$id)->update(['service_name'=>$sName,'service_des'=>$sDescription,'service_img'=>$sImgLink]);
+        if ($result==true) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+
     function addNewServiceData(Request $req){
         $ServiceName=$req->input('ServiceName');
         $ServiceDesc=$req->input('ServiceDesc');
